@@ -1,0 +1,9 @@
+﻿Type,Id,Title,Season,Episode,Writers,Format,Length,Regions,Genres
+Movie,1,Toy Story,,,,,90,1|2|3,Family|Animation
+Show,2,Stranger Things,4,1,Duffer Brothers,,45,,
+Show,3,The Crown,3,2,Peter Morgan,,50,,
+Video,4,The Lion King,,,,VHS,88,1|2|4,Family|Animation
+Movie,5,Inception,,,,,148,1|2|3,Action|Sci-Fi
+Show,6,Breaking Bad,5,14,Vince Gilligan,,47,,
+Video,7,Die Hard,,,,BluRay,132,1|3|4,Action|Thriller
+Movie,8,The Matrix,,,,,136,1|2|3,Action|Sci-Fi
