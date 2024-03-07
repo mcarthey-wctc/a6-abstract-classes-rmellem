@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Linq.Expressions;
 using AbstractMedia.Core.Models;
+using Microsoft.Extensions.Logging;
 
 namespace AbstractMedia.Core.Context;
 
 public class MediaFileContext : IMediaContext
 {
+    public List<Media> Media { get; set; }
     private readonly string _filePath;
 
     public MediaFileContext(string filePath)
@@ -44,7 +47,7 @@ public class MediaFileContext : IMediaContext
         return Media.FirstOrDefault(m => m.Id == id);
     }
 
-    public List<Media> Media { get; set; }
+    
 
     public void SaveChanges()
     {
@@ -111,7 +114,38 @@ public class MediaFileContext : IMediaContext
         // 4. Make sure to include a header line at the top of the file with the names of the properties.
 
         // Your code starts here.
+        try
+        {
+            var sw = new StreamWriter(_filePath);
+            sw.WriteLine("Type,Id,Title,Season,Episode,Writers,Format,Length,Regions,Genres");
 
+            foreach (var mediaItem in media)
+            {
+                switch (media.GetType().Name)
+                {
+                    case "Movie":
+                        Movie movie = (Movie)mediaItem;
+                        sw.WriteLine($"{movie.GetType().Name},{movie.Id},{movie.Title}, , , , , , ,{string.Join("|", movie.Genres)}");
+                        break;
+                    case "Show":
+                        Show show = (Show)mediaItem;
+                        sw.WriteLine($"{show.GetType().Name},{show.Id},{show.Title},{show.Season},{show.Episode},{string.Join("|", show.Writers)}");
+                        break;
+                    case "Video":
+                        Video video = (Video)mediaItem;
+                        sw.WriteLine($"{video.GetType().Name},{video.Id},{video.Title}, , , ,{video.Format},{video.Length},{string.Join("|", video.Regions)}");
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            sw.Close();
+        }    
+        catch( Exception ex )
+        {
+            Console.Error.WriteLine(ex.Message);
+        }
         // Your code ends here.
     }
 }
