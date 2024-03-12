@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using AbstractMedia.Core.Models;
+using System.Linq;
 
 namespace AbstractMedia.Core.Context;
 
@@ -47,5 +48,14 @@ public class MediaRepository : IMediaRepository
     public IEnumerable<Media> GetAllMedia()
     {
         return _context.Media;
+    }
+
+    public IEnumerable<Media> SearchMedia(string title)
+    {
+        //Your code here
+
+        return _context.Media.Where(media => media.Title.ToLower() == title.ToLower()).ToList();
+        
+        
     }
 }
