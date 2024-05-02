@@ -17,11 +17,12 @@ public class MainService : IMainService
 
     public void Invoke()
     {
+        Console.WriteLine("Welcome to the Media Library!");
+        Console.WriteLine("Choose an option:");
+
         var exit = false;
         while (!exit)
         {
-            Console.WriteLine("Welcome to the Media Library!");
-            Console.WriteLine("Choose an option:");
             Console.WriteLine("1. Enter new media");
             Console.WriteLine("2. Find media");
             Console.WriteLine("3. List all media of a specific type");
